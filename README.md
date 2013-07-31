@@ -1,0 +1,4 @@
+Resources
+=========
+
+CakePHP Resources Plugin 

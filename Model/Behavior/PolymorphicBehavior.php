@@ -16,24 +16,28 @@
  * @license     http://www.opensource.org/licenses/mit-license.php The MIT License
  * @via         https://github.com/Theaxiom/Polymorphic2.0
  */
-class PolymorphicBehavior extends ModelBehavior {
-
+class PolymorphicBehavior extends ModelBehavior
+{
     private $__polyConditions = null;
 
-    public function setup(&$model, $config = array()) {
+    public function setup(Model $model, $config = array())
+    {
         $this->settings[$model->name] = am (array('classField' => 'class', 'foreignKey' => 'foreign_id'),$config);
     }
 
-    public function beforeFind(&$model, $queryData) {
+    public function beforeFind(Model $model, $queryData)
+    {
         // You can set conditions for each model associated with the polymorphic model.
         if (isset($queryData['polyConditions'])) {
             $this->__polyConditions = $queryData['polyConditions'];
             unset($queryData['polyConditions']);
         }
+
         return $queryData;
     }
 
-    public function afterFind (&$model, $results, $primary = false) {
+    public function afterFind (Model $model, $results, $primary = false)
+    {
         extract($this->settings[$model->name]);
         if ($primary && isset($results[0][$model->alias][$classField])) {
             foreach ($results as $key => $result) {
@@ -65,7 +69,7 @@ class PolymorphicBehavior extends ModelBehavior {
                     $results[$key][$class] = Set::merge($results[$key][$class], $associated);
                 }
             }
-        } elseif(isset($results[$model->alias][$classField])) {
+        } elseif (isset($results[$model->alias][$classField])) {
             $associated = array();
             $class = $results[$model->alias][$classField];
             $foreignId = $results[$model->alias][$foreignKey];
@@ -84,7 +88,7 @@ class PolymorphicBehavior extends ModelBehavior {
                 $results[$class] = $associated[$class];
             }
         }
+
         return $results;
     }
 }
-?>

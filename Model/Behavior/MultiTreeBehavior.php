@@ -48,7 +48,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return void
      **/
-    public function setup(&$Model, $config = array())
+    public function setup(Model $Model, $config = array())
     {
         // Merge config with defaults
         if ( !is_array($config) ) {
@@ -79,7 +79,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function beforeSave(&$Model)
+    public function beforeSave(Model $Model)
     {
         extract($this->settings[$Model->alias]);
 
@@ -139,7 +139,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function afterSave(&$Model, $created)
+    public function afterSave(Model $Model, $created)
     {
         if ($this->settings[$Model->alias]['__move'] !== false) {
             $this->move($Model, $Model->id, $this->settings[$Model->alias]['__move']);
@@ -152,7 +152,7 @@ class MultiTreeBehavior extends ModelBehavior
      *
      * @return void
      **/
-    public function beforeDelete(&$Model, $cascade)
+    public function beforeDelete(Model $Model, $cascade=true)
     {
         $this->settings[$Model->alias]['__delete'] = $this->_node($Model, $Model->id);
 
@@ -165,7 +165,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function afterDelete(&$Model)
+    public function afterDelete(Model $Model)
     {
         if ($this->settings[$Model->alias]['__delete'] !== false) {
             $this->removeFromTree($Model, $this->settings[$Model->alias]['__delete'], $this->settings[$Model->alias]['dependent']);

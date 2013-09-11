@@ -179,7 +179,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function move(&$Model, $id = null, $dest = null, $position = 'lastChild')
+    public function move(Model $Model, $id = null, $dest = null, $position = 'lastChild')
     {
         if (!$id && $Model->id) {
             $id = $Model->id;
@@ -267,7 +267,7 @@ class MultiTreeBehavior extends ModelBehavior
                     break;
 
                 // Refresh node record (might have been affected by previous shift)
-                // $node = $this->_node(&$Model, $id); // We can save us this query with the following:
+                // $node = $this->_node(Model $Model, $id); // We can save us this query with the following:
                 if ( ($affectedLeft = (!$invalid && (empty($root) || $node[$root] == $destNode[$root]) && $node[$left] >= $start)) !== false )
                     $node[$left] += $treeSize;
                 if ( ($affectedRight = (!$invalid && (empty($root) || $node[$root] == $destNode[$root]) && $node[$right] >= $start)) !== false )
@@ -351,7 +351,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return boolean true on success, false on failure
  * @access public
  */
-    public function moveUp(&$Model, $id = null, $number = 1)
+    public function moveUp(Model $Model, $id = null, $number = 1)
     {
         if (!$id && $Model->id) {
             $id = $Model->id;
@@ -376,7 +376,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return boolean true on success, false on failure
  * @access public
  */
-    public function moveDown(&$Model, $id = null, $number = 1)
+    public function moveDown(Model $Model, $id = null, $number = 1)
     {
         if (!$id && $Model->id) {
             $id = $Model->id;
@@ -402,7 +402,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return boolean true on success, false on failure
  * @access public
  */
-    public function removeFromTree(&$Model, $id = null, $deleteChildren = false)
+    public function removeFromTree(Model $Model, $id = null, $deleteChildren = false)
     {
         if (!$id && $Model->id) {
             $id = $Model->id;
@@ -497,7 +497,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return array Array of child nodes
  * @access public
  */
-    public function getChildren(&$Model, $id = null, $options = array())
+    public function getChildren(Model $Model, $id = null, $options = array())
     {
         $options = Set::merge(
             array(
@@ -574,7 +574,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return integer number of child nodes
  * @access public
  */
-    public function getChildCount(&$Model, $id = null, $direct = false)
+    public function getChildCount(Model $Model, $id = null, $direct = false)
     {
         if (!$id && $Model->id) {
             $id = $Model->id;
@@ -604,7 +604,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function getSiblings(&$Model, $id = null, $includeNode = false, $fields = null, $recursive = null)
+    public function getSiblings(Model $Model, $id = null, $includeNode = false, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -639,7 +639,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function getNextSiblings(&$Model, $id = null, $includeNode = false, $fields = null, $recursive = null)
+    public function getNextSiblings(Model $Model, $id = null, $includeNode = false, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -676,7 +676,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function getPrevSiblings(&$Model, $id = null, $includeNode = false, $fields = null, $recursive = null)
+    public function getPrevSiblings(Model $Model, $id = null, $includeNode = false, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -713,7 +713,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function getNextSibling(&$Model, $id = null, $fields = null, $recursive = null)
+    public function getNextSibling(Model $Model, $id = null, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -749,7 +749,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function getPrevSibling(&$Model, $id = null, $fields = null, $recursive = null)
+    public function getPrevSibling(Model $Model, $id = null, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -790,7 +790,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return array Array of data for the parent node
  * @access public
  */
-    public function getParent(&$Model, $id = null, $fields = null, $recursive = null)
+    public function getParent(Model $Model, $id = null, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -824,7 +824,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return array Array of data for the parent node
  * @access public
  */
-    public function getParentFromTree(&$Model, $id = null, $fields = null, $recursive = null)
+    public function getParentFromTree(Model $Model, $id = null, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -865,7 +865,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return array Top most parent node
  * @access public
  */
-    public function getRoot(&$Model, $id = null, $fields = null, $recursive = null)
+    public function getRoot(Model $Model, $id = null, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -906,7 +906,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return array Array of nodes from top most parent to current node
  * @access public
  */
-    public function getPath(&$Model, $id = null, $fields = null, $recursive = null)
+    public function getPath(Model $Model, $id = null, $fields = null, $recursive = null)
     {
         $overrideRecursive = $recursive;
         if (!$id && $Model->id) {
@@ -944,7 +944,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function getLevel(&$Model, $id = null)
+    public function getLevel(Model $Model, $id = null)
     {
         if (!$id && $Model->id) {
             $id = $Model->id;
@@ -980,7 +980,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return array An associative array of records, where the id is the key, and the display field is the value
  * @access public
  */
-    public function generateTreeList(&$Model, $conditions = null, $keyPath = null, $valuePath = null, $spacer = '_', $recursive = null)
+    public function generateTreeList(Model $Model, $conditions = null, $keyPath = null, $valuePath = null, $spacer = '_', $recursive = null)
     {
         $overrideRecursive = $recursive;
         extract($this->settings[$Model->alias]);
@@ -1055,7 +1055,7 @@ class MultiTreeBehavior extends ModelBehavior
  * @return boolean true on success, false on failure
  * @access public
  */
-    public function repair(&$Model, $broken = 'tree')
+    public function repair(Model $Model, $broken = 'tree')
     {
         extract($this->settings[$Model->alias]);
         $Model->recursive = $recursive;
@@ -1103,7 +1103,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access protected
      * @return void
      **/
-    public function _node(&$Model, $id)
+    public function _node(Model $Model, $id)
     {
         extract($this->settings[$Model->alias]);
         if ( ($node = $Model->find('first', array(
@@ -1123,7 +1123,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access protected
      * @return void
      **/
-    public function _max(&$Model, $field, $conditions = null)
+    public function _max(Model $Model, $field, $conditions = null)
     {
         $max = $Model->find('all', array(
             'fields' => $Model->getDataSource()->calculate($Model, 'max', array($Model->escapeField($field), $field)),
@@ -1140,7 +1140,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access protected
      * @return void
      **/
-    public function _shift(&$Model, $first, $delta, $rootId = 1)
+    public function _shift(Model $Model, $first, $delta, $rootId = 1)
     {
         extract($this->settings[$Model->alias]);
 
@@ -1178,7 +1178,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access protected
      * @return void
      **/
-    public function _shiftRange(&$Model, $first, $last = 0, $delta, $rootId = 1, $destRootId = 1, $levelDelta = 0)
+    public function _shiftRange(Model $Model, $first, $last = 0, $delta, $rootId = 1, $destRootId = 1, $levelDelta = 0)
     {
         extract($this->settings[$Model->alias]);
 
@@ -1216,7 +1216,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access private
      * @return void
      **/
-    public function __delete(&$Model, $id)
+    public function __delete(Model $Model, $id)
     {
         return $Model->deleteAll(array(
             $Model->escapeField() => $id
@@ -1229,7 +1229,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access private
      * @return void
      **/
-    public function __deleteRange(&$Model, $first, $last, $rootId = 1)
+    public function __deleteRange(Model $Model, $first, $last, $rootId = 1)
     {
         extract($this->settings[$Model->alias]);
 

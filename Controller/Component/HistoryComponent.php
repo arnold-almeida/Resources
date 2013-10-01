@@ -31,7 +31,7 @@ class HistoryComponent extends Component
      *
      * @param object $controller
      */
-    public function startup(&$controller)
+    public function startup(Controller $controller)
     {
         $this->Controller = $controller;
         $this->settings = array(

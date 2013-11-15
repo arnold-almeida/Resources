@@ -79,7 +79,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function beforeSave(Model $Model)
+    public function beforeSave(Model $Model, $options=array())
     {
         extract($this->settings[$Model->alias]);
 
@@ -139,7 +139,7 @@ class MultiTreeBehavior extends ModelBehavior
      * @access public
      * @return boolean
      **/
-    public function afterSave(Model $Model, $created)
+    public function afterSave(Model $Model, $created, $options=array())
     {
         if ($this->settings[$Model->alias]['__move'] !== false) {
             $this->move($Model, $Model->id, $this->settings[$Model->alias]['__move']);
